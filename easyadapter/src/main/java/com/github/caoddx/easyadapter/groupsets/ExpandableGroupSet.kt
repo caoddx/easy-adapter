@@ -49,6 +49,11 @@ class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind:
         inner.addLast(bodyGroup)
     }
 
+    fun isFolded(index: Int) {
+        val head = heads[index]
+        return head.folded
+    }
+    
     fun fold(index: Int) {
         val head = heads[index]
         @Suppress("UNCHECKED_CAST")
