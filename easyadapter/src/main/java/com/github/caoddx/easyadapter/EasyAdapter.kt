@@ -14,7 +14,7 @@ import com.github.caoddx.easyadapter.groupsets.SingleGroupSet
     }
     get() = adapter as EasyAdapter*/
 
-class EasyAdapter(vararg groups: Group) : RecyclerView.Adapter<EasyAdapter.ViewHolder>() {
+class EasyAdapter(vararg groups: Group, private val emptyView: View? = null) : RecyclerView.Adapter<EasyAdapter.ViewHolder>() {
 
     private val groupSets: List<BaseGroupSet> = groups.map {
         (it as? BaseGroupSet ?: SingleGroupSet(it as BaseGroup<*>))
@@ -69,7 +69,13 @@ class EasyAdapter(vararg groups: Group) : RecyclerView.Adapter<EasyAdapter.ViewH
     }
 
     override fun getItemCount(): Int {
-        return groupSets.sumBy { it.itemSize }
+        return groupSets.sumBy { it.itemSize }.also {
+            emptyView?.visibility = if (it == 0) {
+                View.VISIBLE
+            } else {
+                View.INVISIBLE
+            }
+        }
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

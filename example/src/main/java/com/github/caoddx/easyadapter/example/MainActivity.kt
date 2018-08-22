@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
             group.add(head, list)
         }
 
-        recyclerView.adapter = EasyAdapter(group)
+        recyclerView.adapter = EasyAdapter(emptyView = empty)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 }
