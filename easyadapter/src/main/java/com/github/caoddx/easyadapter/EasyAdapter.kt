@@ -8,13 +8,13 @@ import com.github.caoddx.easyadapter.groups.BaseGroup
 import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
 import com.github.caoddx.easyadapter.groupsets.SingleGroupSet
 
-/*var RecyclerView.multiAdapter: MultiAdapter
+/*var RecyclerView.multiAdapter: EasyAdapter
     set(value) {
         adapter = value
     }
-    get() = adapter as MultiAdapter*/
+    get() = adapter as EasyAdapter*/
 
-class MultiAdapter(vararg groups: Group) : RecyclerView.Adapter<MultiAdapter.ViewHolder>() {
+class EasyAdapter(vararg groups: Group) : RecyclerView.Adapter<EasyAdapter.ViewHolder>() {
 
     private val groupSets: List<BaseGroupSet> = groups.map {
         (it as? BaseGroupSet ?: SingleGroupSet(it as BaseGroup<*>))

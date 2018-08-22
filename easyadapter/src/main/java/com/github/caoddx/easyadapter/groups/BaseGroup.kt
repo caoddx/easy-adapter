@@ -4,13 +4,13 @@ import android.support.annotation.LayoutRes
 import android.view.View
 import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
 import com.github.caoddx.easyadapter.Group
-import com.github.caoddx.easyadapter.MultiAdapter
+import com.github.caoddx.easyadapter.EasyAdapter
 
 abstract class BaseGroup<T>(@LayoutRes val layoutId: Int, private val onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : Group {
 
     var groupSet: BaseGroupSet? = null
 
-    val adapter: MultiAdapter? get() = groupSet?.adapter
+    val adapter: EasyAdapter? get() = groupSet?.adapter
 
     internal fun postOnBind(itemView: View, position: Int) {
         onBind(this, itemView, position)
