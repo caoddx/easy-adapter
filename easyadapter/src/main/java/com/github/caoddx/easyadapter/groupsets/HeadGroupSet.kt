@@ -3,7 +3,7 @@ package com.github.caoddx.easyadapter.groupsets
 import com.github.caoddx.easyadapter.groups.BaseGroup
 import com.github.caoddx.easyadapter.groups.SingleGroup
 
-class HeadGroupSet(private val headGroup: SingleGroup, private val dataGroup: BaseGroup<*>, private val footGroup: SingleGroup? = null) : BaseGroupSet() {
+class HeadGroupSet(private val headGroup: SingleGroup<*>, private val dataGroup: BaseGroup<*>, private val footGroup: SingleGroup<*>? = null) : BaseGroupSet() {
 
     private val groups =
             if (footGroup == null)

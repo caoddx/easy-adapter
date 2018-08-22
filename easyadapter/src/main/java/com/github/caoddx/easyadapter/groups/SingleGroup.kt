@@ -2,11 +2,13 @@ package com.github.caoddx.easyadapter.groups
 
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.groups.BaseGroup
 
-open class SingleGroup(@LayoutRes layoutId: Int, initVisible: Boolean = true, onBind: BaseGroup<Unit>.(itemView: View, position: Int) -> Unit) : BaseGroup<Unit>(layoutId, onBind) {
+open class SingleGroup<T>(@LayoutRes layoutId: Int, private val item: T, initVisible: Boolean = true,
+                          onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
 
-    override fun getItem(position: Int) {}
+    override fun getItem(position: Int): T {
+        return item
+    }
 
     override val size: Int
         get() = if (_visible) 1 else 0
