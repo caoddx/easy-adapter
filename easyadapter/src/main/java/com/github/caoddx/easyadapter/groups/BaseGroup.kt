@@ -2,9 +2,9 @@ package com.github.caoddx.easyadapter.groups
 
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
-import com.github.caoddx.easyadapter.Group
 import com.github.caoddx.easyadapter.EasyAdapter
+import com.github.caoddx.easyadapter.Group
+import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
 
 abstract class BaseGroup<T>(@LayoutRes val layoutId: Int, private val onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : Group {
 
@@ -47,6 +47,11 @@ abstract class BaseGroup<T>(@LayoutRes val layoutId: Int, private val onBind: Ba
     protected fun notifyDataSetChanged(oldSize: Int) {
         notifyItemRangeRemoved(0, oldSize)
         notifyItemRangeInserted(0, size)
+    }
+
+    protected fun notifyItemChanged(position: Int) {
+        adapter?.notifyItemChanged(getAdapterPosition(position))
+        performOnDataSetChanged()
     }
 
     protected fun notifyItemInserted(position: Int) {

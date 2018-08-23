@@ -2,7 +2,6 @@ package com.github.caoddx.easyadapter.groups
 
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.groups.BaseGroup
 import java.util.*
 
 class MutableGroup<T>(@LayoutRes layoutId: Int, items: List<T> = emptyList(), onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
@@ -31,6 +30,11 @@ class MutableGroup<T>(@LayoutRes layoutId: Int, items: List<T> = emptyList(), on
         this.items.clear()
         this.items.addAll(items)
         notifyDataSetChanged(oldSize)
+    }
+
+    fun replaceAt(index: Int, newItem: T) {
+        items[index] = newItem
+        notifyItemChanged(index)
     }
 
     fun add(index: Int, item: T) {

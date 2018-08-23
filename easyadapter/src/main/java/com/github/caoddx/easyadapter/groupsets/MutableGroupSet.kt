@@ -30,6 +30,13 @@ open class MutableGroupSet : BaseGroupSet() {
         adapter?.notifyItemRangeRemoved(p!!, size)
     }
 
+    fun add(index: Int, group: BaseGroup<*>) {
+        groups.add(index, group)
+        group.groupSet = this
+        val p = adapter?.getGroupStartPosition(group)
+        adapter?.notifyItemRangeInserted(p!!, group.size)
+    }
+
     fun addLast(group: BaseGroup<*>) {
         groups.addLast(group)
         group.groupSet = this
@@ -51,4 +58,8 @@ open class MutableGroupSet : BaseGroupSet() {
         return group
     }
 
+    fun replaceAt(index: Int, newGroup: BaseGroup<*>) {
+        remoteAt(index)
+        add(index, newGroup)
+    }
 }

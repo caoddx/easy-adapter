@@ -3,8 +3,11 @@ package com.github.caoddx.easyadapter.groups
 import android.support.annotation.LayoutRes
 import android.view.View
 
-open class SingleGroup<T>(@LayoutRes layoutId: Int, private val item: T, initVisible: Boolean = true,
+open class SingleGroup<T>(@LayoutRes layoutId: Int, item: T, initVisible: Boolean = true,
                           onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
+
+    var item: T = item
+        private set
 
     override fun getItem(position: Int): T {
         return item
@@ -31,5 +34,12 @@ open class SingleGroup<T>(@LayoutRes layoutId: Int, private val item: T, initVis
 
     fun hide() {
         visible = false
+    }
+
+    fun replace(item: T) {
+        this.item = item
+        if (visible) {
+            notifyItemChanged(0)
+        }
     }
 }

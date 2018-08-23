@@ -37,7 +37,7 @@ class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind:
 
     fun add(head: T, bodies: List<R>) {
         val index = heads.size
-        heads.addLast(Head(head, index, bodies))
+        heads.addLast(Head(head, index, bodies, true))
 
         val headGroup = SingleGroup(headLayoutId, head, true) { itemView, position ->
             headOnBind(this, index, itemView)
@@ -47,6 +47,24 @@ class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind:
         }
         inner.addLast(headGroup)
         inner.addLast(bodyGroup)
+    }
+
+    fun replaceHead(index: Int, headItem: T) {
+        val head = heads[index]
+        @Suppress("UNCHECKED_CAST")
+        val g = inner.getGroup(index * 2) as SingleGroup<T>
+        heads[index] = head.copy(head = headItem)
+        g.replace(headItem)
+    }
+
+    fun replaceBodies(index: Int, bodies: List<R>) {
+        val head = heads[index]
+        @Suppress("UNCHECKED_CAST")
+        heads[index] = head.copy(bodies = bodies)
+        if (!head.folded) {
+            val g = inner.getGroup(index * 2 + 1) as MutableGroup<R>
+            g.replace(bodies)
+        }
     }
 
     fun isFolded(index: Int): Boolean {
@@ -63,24 +81,26 @@ class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind:
         return getBodies(index).size
     }
 
-    fun fold(index: Int) {
+    private fun fold(index: Int, fold: Boolean) {
         val head = heads[index]
         @Suppress("UNCHECKED_CAST")
         val g = inner.getGroup(index * 2 + 1) as MutableGroup<R>
-        if (!head.folded) {
-            head.folded = true
+        if (fold && !head.folded) {
+            heads[index] = head.copy(folded = true)
             g.clear()
+        }
+        if (!fold && head.folded) {
+            heads[index] = head.copy(folded = false)
+            g.replace(head.bodies)
         }
     }
 
+    fun fold(index: Int) {
+        fold(index, true)
+    }
+
     fun unfold(index: Int) {
-        val head = heads[index]
-        @Suppress("UNCHECKED_CAST")
-        val g = inner.getGroup(index * 2 + 1) as MutableGroup<R>
-        if (head.folded) {
-            head.folded = false
-            g.replace(head.bodies)
-        }
+        fold(index, false)
     }
 
     fun toggle(index: Int) {
@@ -104,7 +124,5 @@ class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind:
         }
     }
 
-    private class Head<T, R>(val head: T, val headIndex: Int, val bodies: List<R>) {
-        var folded: Boolean = true
-    }
+    private data class Head<T, R>(val head: T, val headIndex: Int, val bodies: List<R>, val folded: Boolean)
 }
