@@ -10,15 +10,15 @@ import com.github.caoddx.easyadapter.experimental.plain.ListGroup
 import com.github.caoddx.easyadapter.experimental.plain.SingleGroup
 
 class ExpandableMix<T, R>(
-        val dataSource: ExpandableDataSource<T, R>,
+        private val dataSource: ExpandableDataSource<T, R>,
         @LayoutRes val headLayoutId: Int,
-        val headOnBind: (headIndex: Int, itemView: View, item: T) -> Unit,
+        val headOnBind: (itemView: View, headIndex: Int, item: T) -> Unit,
         @LayoutRes val bodyLayoutId: Int,
         val bodyOnBind: (itemView: View, item: R, position: Int) -> Unit
 ) : BaseMixGroup() {
 
     init {
-        dataSource.group = this
+        dataSource.mix = this
     }
 
     private val groups: MutableList<PlainGroup<*>> = dataSource.groups
@@ -39,7 +39,7 @@ class ExpandableMix<T, R>(
 
     fun generateHeadGroup(headIndex: Int, singleDataSource: SingleDataSource<T>): SingleGroup<T> {
         return SingleGroup(headLayoutId, singleDataSource) { itemView, item ->
-            headOnBind(headIndex, itemView, item)
+            headOnBind(itemView, headIndex, item)
         }
     }
 

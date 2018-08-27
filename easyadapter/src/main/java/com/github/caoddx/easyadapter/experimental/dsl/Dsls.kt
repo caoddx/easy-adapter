@@ -44,7 +44,7 @@ fun <T, R, D : ExpandableDataSource<T, R>> ExpandableDsl<T, R, D>.head(dsl: Expa
     head.dsl()
 }
 
-fun <T, R, D : ExpandableDataSource<T, R>> ExpandableDsl<T, R, D>.bodies(dsl: ExpandableDsl.BodiesDsl<T>.() -> Unit) {
+fun <T, R, D : ExpandableDataSource<T, R>> ExpandableDsl<T, R, D>.bodies(dsl: ExpandableDsl.BodiesDsl<R>.() -> Unit) {
     bodies.dsl()
 }
 
@@ -58,7 +58,7 @@ fun main(args: Array<String>) {
         expandable(ExpandableDataSource<String, Int>(listOf())) {
             head {
                 layout(0)
-                bindView { itemView, item ->
+                bindView { itemView, headIndex, item ->
 
                 }
             }

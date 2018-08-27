@@ -18,7 +18,8 @@ class MainActivity : AppCompatActivity() {
 
         val examples = listOf(
                 "no dsl example" to NoDslActivity::class.java,
-                "dsl example" to DslActivity::class.java
+                "dsl example" to DslActivity::class.java,
+                "expandable example" to ExpandableActivity::class.java
         )
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
