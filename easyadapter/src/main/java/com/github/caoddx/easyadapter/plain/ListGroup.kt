@@ -1,8 +1,7 @@
-package com.github.caoddx.easyadapter.groups
+package com.github.caoddx.easyadapter.plain
 
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.groups.BaseGroup
 
 class ListGroup<T>(@LayoutRes layoutId: Int, items: List<T>, onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
 

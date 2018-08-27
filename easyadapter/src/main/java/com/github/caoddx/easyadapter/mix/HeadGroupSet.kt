@@ -1,7 +1,7 @@
-package com.github.caoddx.easyadapter.groupsets
+package com.github.caoddx.easyadapter.mix
 
-import com.github.caoddx.easyadapter.groups.BaseGroup
-import com.github.caoddx.easyadapter.groups.SingleGroup
+import com.github.caoddx.easyadapter.plain.BaseGroup
+import com.github.caoddx.easyadapter.plain.SingleGroup
 
 class HeadGroupSet(private val headGroup: SingleGroup<*>, private val dataGroup: BaseGroup<*>, private val footGroup: SingleGroup<*>? = null) : BaseGroupSet() {
 

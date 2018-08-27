@@ -1,11 +1,11 @@
-package com.github.caoddx.easyadapter.groupsets
+package com.github.caoddx.easyadapter.mix
 
 import android.support.annotation.LayoutRes
 import android.view.View
 import com.github.caoddx.easyadapter.EasyAdapter
-import com.github.caoddx.easyadapter.groups.BaseGroup
-import com.github.caoddx.easyadapter.groups.MutableGroup
-import com.github.caoddx.easyadapter.groups.SingleGroup
+import com.github.caoddx.easyadapter.plain.BaseGroup
+import com.github.caoddx.easyadapter.plain.MutableGroup
+import com.github.caoddx.easyadapter.plain.SingleGroup
 import java.util.*
 
 class ExpandableGroupSet<T, R>(@LayoutRes val headLayoutId: Int, val headOnBind: ExpandableGroupSet<T, R>.(group: BaseGroup<T>, headIndex: Int, itemView: View) -> Unit,

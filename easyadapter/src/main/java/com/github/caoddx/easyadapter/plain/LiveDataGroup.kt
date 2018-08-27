@@ -1,11 +1,10 @@
-package com.github.caoddx.easyadapter.groups
+package com.github.caoddx.easyadapter.plain
 
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.Observer
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.groups.BaseGroup
 
 class LiveDataGroup<T>(@LayoutRes layoutId: Int, owner: LifecycleOwner, liveData: LiveData<List<T>>, onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
 

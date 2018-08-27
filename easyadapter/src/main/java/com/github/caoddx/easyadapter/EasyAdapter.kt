@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.caoddx.easyadapter.groupsets.SingleGroupSet
+import com.github.caoddx.easyadapter.mix.SingleGroupSet
 
 /*var RecyclerView.multiAdapter: EasyAdapter
     set(value) {

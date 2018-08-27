@@ -1,4 +1,4 @@
-package com.github.caoddx.easyadapter.groups
+package com.github.caoddx.easyadapter.plain
 
 import android.support.annotation.LayoutRes
 import android.view.View

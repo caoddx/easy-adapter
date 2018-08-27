@@ -1,4 +1,4 @@
-package com.github.caoddx.easyadapter.groupsets
+package com.github.caoddx.easyadapter.mix
 
 import com.github.caoddx.easyadapter.EasyAdapter
 import com.github.caoddx.easyadapter.MixGroup
