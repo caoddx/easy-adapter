@@ -1,26 +1,15 @@
 package com.github.caoddx.easyadapter.experimental
 
 import android.support.annotation.LayoutRes
-import android.view.View
-import com.github.caoddx.easyadapter.EasyAdapter
-import com.github.caoddx.easyadapter.Group
-import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
+import com.github.caoddx.easyadapter.MixGroup
+import com.github.caoddx.easyadapter.PlainGroup
 
-abstract class BaseGroup<T>(@LayoutRes val layoutId: Int) : Group {
+abstract class BaseGroup<T>(@LayoutRes override val layoutId: Int) : PlainGroup<T> {
 
-    var groupSet: BaseGroupSet? = null
-
-    val adapter: EasyAdapter? get() = groupSet?.adapter
-
-    internal abstract fun postOnBind(itemView: View, position: Int)
-
-    abstract val size: Int
-
-    abstract fun getItem(position: Int): T
+    override var mixGroup: MixGroup? = null
 
     protected fun getAdapterPosition(position: Int): Int {
-        TODO()
-        // return (adapter?.getGroupStartPosition(this) ?: 0) + position
+        return (adapter?.getGroupStartPosition(this) ?: 0) + position
     }
 
     private fun performOnDataSetChanged() {

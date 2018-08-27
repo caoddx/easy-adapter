@@ -16,7 +16,7 @@ class HeadGroupSet(private val headGroup: SingleGroup<*>, private val dataGroup:
             headGroup.visible = it.size != 0
             footGroup?.visible = it.size != 0
         }
-        groups.forEach { it.groupSet = this }
+        groups.forEach { it.mixGroup = this }
     }
 
     override val groupSize: Int = groups.size

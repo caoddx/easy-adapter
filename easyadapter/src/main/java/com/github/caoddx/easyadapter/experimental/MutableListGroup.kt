@@ -9,7 +9,11 @@ class MutableListGroup<T>(@LayoutRes layoutId: Int,
                           val onBind: MutableListGroup<T>.(itemView: View, item: T, position: Int) -> Unit)
     : BaseGroup<T>(layoutId) {
 
-    override fun postOnBind(itemView: View, position: Int) {
+    init {
+        dataSource.group = this
+    }
+
+    override fun bindView(itemView: View, position: Int) {
         onBind(this, itemView, getItem(position), position)
     }
 
@@ -22,12 +26,16 @@ class MutableListGroup<T>(@LayoutRes layoutId: Int,
 }
 
 interface DataSource<T> {
+    var group: MutableListGroup<T>?
+
     fun getSize(): Int
 
     fun getItem(position: Int): T
 }
 
 class ListDataSource<T>(val data: List<T>) : DataSource<T> {
+    override var group: MutableListGroup<T>? = null
+
     override fun getSize(): Int {
         return data.size
     }
@@ -39,8 +47,7 @@ class ListDataSource<T>(val data: List<T>) : DataSource<T> {
 
 class MutableDataSource<T> : DataSource<T> {
 
-    var group: MutableListGroup<T>? = null
-        internal set
+    override var group: MutableListGroup<T>? = null
 
     private val items = LinkedList<T>()
 

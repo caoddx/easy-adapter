@@ -20,6 +20,10 @@ class AdapterDsl {
         groups.add(group)
     }
 
+    fun group(group: Group) {
+        addGroup(group)
+    }
+
     fun <T> single(dataSource: SingleDataSource<T>, dsl: SingleDsl<T>.() -> Unit) {
         val single = SingleDsl(dataSource)
         single.dsl()

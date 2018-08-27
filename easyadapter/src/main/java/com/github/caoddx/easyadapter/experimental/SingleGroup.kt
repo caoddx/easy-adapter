@@ -8,7 +8,7 @@ class SingleGroup<T>(@LayoutRes layoutId: Int,
                      val onBind: SingleGroup<T>.(itemView: View, item: T) -> Unit)
     : BaseGroup<T>(layoutId) {
 
-    override fun postOnBind(itemView: View, position: Int) {
+    override fun bindView(itemView: View, position: Int) {
         onBind(this, itemView, getItem(position))
     }
 

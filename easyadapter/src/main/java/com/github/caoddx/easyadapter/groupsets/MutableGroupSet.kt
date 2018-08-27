@@ -32,14 +32,14 @@ open class MutableGroupSet : BaseGroupSet() {
 
     fun add(index: Int, group: BaseGroup<*>) {
         groups.add(index, group)
-        group.groupSet = this
+        group.mixGroup = this
         val p = adapter?.getGroupStartPosition(group)
         adapter?.notifyItemRangeInserted(p!!, group.size)
     }
 
     fun addLast(group: BaseGroup<*>) {
         groups.addLast(group)
-        group.groupSet = this
+        group.mixGroup = this
         val p = adapter?.getGroupStartPosition(group)
         adapter?.notifyItemRangeInserted(p!!, group.size)
     }
@@ -51,7 +51,7 @@ open class MutableGroupSet : BaseGroupSet() {
         val p = adapter?.getGroupStartPosition(group)
 
         groups.removeAt(index)
-        group.groupSet = null
+        group.mixGroup = null
 
         adapter?.notifyItemRangeRemoved(p!!, group.size)
 

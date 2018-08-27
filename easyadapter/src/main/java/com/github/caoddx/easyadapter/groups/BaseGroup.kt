@@ -2,23 +2,16 @@ package com.github.caoddx.easyadapter.groups
 
 import android.support.annotation.LayoutRes
 import android.view.View
-import com.github.caoddx.easyadapter.EasyAdapter
-import com.github.caoddx.easyadapter.Group
-import com.github.caoddx.easyadapter.groupsets.BaseGroupSet
+import com.github.caoddx.easyadapter.MixGroup
+import com.github.caoddx.easyadapter.PlainGroup
 
-abstract class BaseGroup<T>(@LayoutRes val layoutId: Int, private val onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : Group {
+abstract class BaseGroup<T>(@LayoutRes override val layoutId: Int, private val onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : PlainGroup<T> {
 
-    var groupSet: BaseGroupSet? = null
+    override var mixGroup: MixGroup? = null
 
-    val adapter: EasyAdapter? get() = groupSet?.adapter
-
-    internal fun postOnBind(itemView: View, position: Int) {
+    override fun bindView(itemView: View, position: Int) {
         onBind(this, itemView, position)
     }
-
-    abstract fun getItem(position: Int): T
-
-    abstract val size: Int
 
     private val listeners: MutableList<(BaseGroup<*>) -> Unit> = mutableListOf()
 
