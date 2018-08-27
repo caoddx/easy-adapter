@@ -24,8 +24,8 @@ class NoDslActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recyclerView.adapter = EasyAdapter(
-                SingleGroup(R.layout.item_action, ImmutableSingleDataSource(Unit)) { itemView, item ->
-                    itemView.button.text = "random"
+                SingleGroup(R.layout.item_action, ImmutableSingleDataSource("random")) { itemView, item ->
+                    itemView.button.text = item
                     itemView.button.setOnClickListener {
                         rand(ds)
                     }
@@ -33,7 +33,7 @@ class NoDslActivity : AppCompatActivity() {
                 SingleGroup(R.layout.item_action, ImmutableSingleDataSource(Unit)) { itemView, item ->
                     itemView.button.text = "remove first"
                     itemView.button.setOnClickListener {
-                        rand(ds)
+                        ds.removeFirst()
                     }
                 },
                 ListGroup(R.layout.item_body, ds) { itemView, item, position ->
@@ -43,7 +43,7 @@ class NoDslActivity : AppCompatActivity() {
                 SingleGroup(R.layout.item_action, ImmutableSingleDataSource(Unit)) { itemView, item ->
                     itemView.button.text = "add last"
                     itemView.button.setOnClickListener {
-                        rand(ds)
+                        ds.addLast("${ThreadLocalRandom.current().nextLong()}")
                     }
                 },
                 emptyView = empty)
@@ -53,7 +53,7 @@ class NoDslActivity : AppCompatActivity() {
 
     private fun rand(ds: MutableListDataSource<String>) {
         val random = ThreadLocalRandom.current()
-        val list = (0..random.nextInt(1, 10)).map { random.nextLong(0, 1000000).toString() }
+        val list = (0..random.nextInt(1, 10)).map { random.nextLong().toString() }
         ds.replace(list)
     }
 }
