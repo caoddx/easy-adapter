@@ -3,11 +3,11 @@ package com.github.caoddx.easyadapter.experimental.datasource
 import com.github.caoddx.easyadapter.experimental.plain.ListGroup
 import java.util.*
 
-class MutableListDataSource<T> : ListDataSource<T> {
+class MutableListDataSource<T>(initData: List<T> = emptyList()) : ListDataSource<T> {
 
     override var group: ListGroup<T>? = null
 
-    private val items = LinkedList<T>()
+    private val items = LinkedList<T>(initData)
 
     override fun getSize(): Int {
         return items.size
@@ -28,6 +28,39 @@ class MutableListDataSource<T> : ListDataSource<T> {
         this.items.clear()
         this.items.addAll(items)
         group?.notifyDataSetChanged(oldSize)
+    }
+
+    fun add(index: Int, item: T) {
+        items.add(index, item)
+        group?.notifyItemInserted(index)
+    }
+
+    fun addFirst(item: T) {
+        items.addFirst(item)
+        group?.notifyItemInserted(0)
+    }
+
+    fun addLast(item: T) {
+        items.addLast(item)
+        group?.notifyItemInserted(getSize() - 1)
+    }
+
+    fun removeAt(index: Int): T {
+        val item = items.removeAt(index)
+        group?.notifyItemRemoved(index)
+        return item
+    }
+
+    fun removeFirst(): T {
+        val item = items.removeFirst()
+        group?.notifyItemRemoved(0)
+        return item
+    }
+
+    fun removeLast(): T {
+        val item = items.removeLast()
+        group?.notifyItemRemoved(getSize())
+        return item
     }
 }
 
