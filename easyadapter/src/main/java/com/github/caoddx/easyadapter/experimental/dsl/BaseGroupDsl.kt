@@ -6,7 +6,7 @@ import com.github.caoddx.easyadapter.Group
 abstract class BaseGroupDsl {
 
     @LayoutRes
-    protected var layoutId: Int = 0
+    internal var layoutId: Int = 0
         private set
 
     fun layout(@LayoutRes layoutId: Int) {

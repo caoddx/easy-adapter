@@ -34,12 +34,42 @@ fun <T, R : SingleDataSource<T>> AdapterDsl.single(dataSource: R, dsl: SingleDsl
     addGroup(single.build())
 }
 
+fun <T, R, D : ExpandableDataSource<T, R>> AdapterDsl.expandable(dataSource: D, dsl: ExpandableDsl<T, R, D>.() -> Unit) {
+    val expandable = ExpandableDsl(dataSource)
+    expandable.dsl()
+    addGroup(expandable.build())
+}
+
+fun <T, R, D : ExpandableDataSource<T, R>> ExpandableDsl<T, R, D>.head(dsl: ExpandableDsl.HeadDsl<T>.() -> Unit) {
+    head.dsl()
+}
+
+fun <T, R, D : ExpandableDataSource<T, R>> ExpandableDsl<T, R, D>.bodies(dsl: ExpandableDsl.BodiesDsl<T>.() -> Unit) {
+    bodies.dsl()
+}
+
 fun main(args: Array<String>) {
 
     val ds = MutableSingleDataSource("head")
     val ds2 = MutableListDataSource<Int>()
 
     easyAdapter {
+
+        expandable(ExpandableDataSource<String, Int>(listOf())) {
+            head {
+                layout(0)
+                bindView { itemView, item ->
+
+                }
+            }
+
+            bodies {
+                layout(0)
+                bindView { itemView, item, position ->
+
+                }
+            }
+        }
 
         single(ds) {
             layout(0)
