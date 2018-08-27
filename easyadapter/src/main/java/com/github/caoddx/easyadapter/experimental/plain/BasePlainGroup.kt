@@ -8,19 +8,19 @@ abstract class BasePlainGroup<T>(@LayoutRes override val layoutId: Int) : PlainG
 
     override var mixGroup: MixGroup? = null
 
-    protected fun getAdapterPosition(position: Int): Int {
+    internal fun getAdapterPosition(position: Int): Int {
         return (adapter?.getGroupStartPosition(this) ?: 0) + position
     }
 
     private fun performOnDataSetChanged() {
     }
 
-    protected fun notifyAdapterDataSetChanged() {
+    internal fun notifyAdapterDataSetChanged() {
         adapter?.notifyDataSetChanged()
         performOnDataSetChanged()
     }
 
-    fun notifyDataSetChanged() {
+    internal fun notifyDataSetChanged() {
         adapter?.notifyItemRangeChanged(getAdapterPosition(0), size)
         performOnDataSetChanged()
     }
@@ -30,27 +30,27 @@ abstract class BasePlainGroup<T>(@LayoutRes override val layoutId: Int) : PlainG
         notifyItemRangeInserted(0, size)
     }
 
-    protected fun notifyItemChanged(position: Int) {
+    internal fun notifyItemChanged(position: Int) {
         adapter?.notifyItemChanged(getAdapterPosition(position))
         performOnDataSetChanged()
     }
 
-    protected fun notifyItemInserted(position: Int) {
+    internal fun notifyItemInserted(position: Int) {
         adapter?.notifyItemInserted(getAdapterPosition(position))
         performOnDataSetChanged()
     }
 
-    protected fun notifyItemRemoved(position: Int) {
+    internal fun notifyItemRemoved(position: Int) {
         adapter?.notifyItemRemoved(getAdapterPosition(position))
         performOnDataSetChanged()
     }
 
-    protected fun notifyItemRangeInserted(position: Int, itemCount: Int) {
+    internal fun notifyItemRangeInserted(position: Int, itemCount: Int) {
         adapter?.notifyItemRangeInserted(getAdapterPosition(position), itemCount)
         performOnDataSetChanged()
     }
 
-    protected fun notifyItemRangeRemoved(position: Int, itemCount: Int) {
+    internal fun notifyItemRangeRemoved(position: Int, itemCount: Int) {
         adapter?.notifyItemRangeRemoved(getAdapterPosition(position), itemCount)
         performOnDataSetChanged()
     }
