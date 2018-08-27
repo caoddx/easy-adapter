@@ -1,15 +1,40 @@
 package com.github.caoddx.easyadapter.experimental.datasource
 
-class MutableSingleDataSource<T>(initData: T? = null) : SingleDataSource<T> {
+import com.github.caoddx.easyadapter.experimental.plain.SingleGroup
 
-    private var data: T? = initData
+class MutableSingleDataSource<T>(initData: T) : SingleDataSource<T> {
+
+    override var group: SingleGroup<T>? = null
+
+    var data: T = initData
+        set(value) {
+            field = value
+            if (visible) {
+                group?.notifyDataSetChanged()
+            }
+        }
+
+    var visible: Boolean = true
 
     override fun haveData(): Boolean {
-        return data != null
+        return visible
     }
 
     override fun getItem(): T {
-        return data!!
+        return data
     }
 
+    fun show() {
+        if (!visible) {
+            visible = true
+            group?.notifyDataSetChanged(0)
+        }
+    }
+
+    fun hide() {
+        if (visible) {
+            visible = false
+            group?.notifyDataSetChanged(1)
+        }
+    }
 }

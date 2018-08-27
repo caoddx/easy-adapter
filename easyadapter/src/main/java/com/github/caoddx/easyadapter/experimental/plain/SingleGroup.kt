@@ -9,6 +9,10 @@ class SingleGroup<T>(@LayoutRes layoutId: Int,
                      val onBind: SingleGroup<T>.(itemView: View, item: T) -> Unit)
     : BasePlainGroup<T>(layoutId) {
 
+    init {
+        singleDataSource.group = this
+    }
+
     override fun bindView(itemView: View, position: Int) {
         onBind(this, itemView, getItem(position))
     }
