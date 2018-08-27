@@ -1,10 +1,10 @@
-package com.github.caoddx.easyadapter.experimental
+package com.github.caoddx.easyadapter.experimental.plain
 
 import android.support.annotation.LayoutRes
 import com.github.caoddx.easyadapter.MixGroup
 import com.github.caoddx.easyadapter.PlainGroup
 
-abstract class BaseGroup<T>(@LayoutRes override val layoutId: Int) : PlainGroup<T> {
+abstract class BasePlainGroup<T>(@LayoutRes override val layoutId: Int) : PlainGroup<T> {
 
     override var mixGroup: MixGroup? = null
 

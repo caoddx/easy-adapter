@@ -1,12 +1,13 @@
-package com.github.caoddx.easyadapter.experimental
+package com.github.caoddx.easyadapter.experimental.plain
 
 import android.support.annotation.LayoutRes
 import android.view.View
+import com.github.caoddx.easyadapter.experimental.datasource.SingleDataSource
 
 class SingleGroup<T>(@LayoutRes layoutId: Int,
                      private val singleDataSource: SingleDataSource<T>,
                      val onBind: SingleGroup<T>.(itemView: View, item: T) -> Unit)
-    : BaseGroup<T>(layoutId) {
+    : BasePlainGroup<T>(layoutId) {
 
     override fun bindView(itemView: View, position: Int) {
         onBind(this, itemView, getItem(position))
@@ -23,22 +24,3 @@ class SingleGroup<T>(@LayoutRes layoutId: Int,
     }
 }
 
-interface SingleDataSource<T> {
-    fun haveData(): Boolean
-
-    fun getItem(): T
-}
-
-class MutableSingleDataSource<T>(initData: T? = null) : SingleDataSource<T> {
-
-    private var data: T? = initData
-
-    override fun haveData(): Boolean {
-        return data != null
-    }
-
-    override fun getItem(): T {
-        return data!!
-    }
-
-}
