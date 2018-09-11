@@ -1,9 +1,9 @@
-package com.github.caoddx.easyadapter.experimental.dsl
+package com.github.caoddx.easyadapter.dsl
 
 import android.view.View
 import com.github.caoddx.easyadapter.Group
-import com.github.caoddx.easyadapter.experimental.datasource.ListDataSource
-import com.github.caoddx.easyadapter.experimental.plain.ListGroup
+import com.github.caoddx.easyadapter.datasource.ListDataSource
+import com.github.caoddx.easyadapter.plain.ListGroup
 
 class ListDsl<T>(private val dataSource: ListDataSource<T>) : BaseGroupDsl() {
 

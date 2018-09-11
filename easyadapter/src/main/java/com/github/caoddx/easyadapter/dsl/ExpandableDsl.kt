@@ -1,9 +1,9 @@
-package com.github.caoddx.easyadapter.experimental.dsl
+package com.github.caoddx.easyadapter.dsl
 
 import android.view.View
 import com.github.caoddx.easyadapter.Group
-import com.github.caoddx.easyadapter.experimental.datasource.ExpandableDataSource
-import com.github.caoddx.easyadapter.experimental.mix.ExpandableMix
+import com.github.caoddx.easyadapter.datasource.ExpandableDataSource
+import com.github.caoddx.easyadapter.mix.ExpandableMix
 
 class ExpandableDsl<T, R, D : ExpandableDataSource<T, R>>(private val dataSource: D) : BaseGroupDsl() {
 

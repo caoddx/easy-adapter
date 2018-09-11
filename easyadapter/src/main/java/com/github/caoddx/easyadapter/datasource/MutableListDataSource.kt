@@ -1,6 +1,6 @@
-package com.github.caoddx.easyadapter.experimental.datasource
+package com.github.caoddx.easyadapter.datasource
 
-import com.github.caoddx.easyadapter.experimental.plain.ListGroup
+import com.github.caoddx.easyadapter.plain.ListGroup
 import java.util.*
 
 class MutableListDataSource<T>(initData: List<T> = emptyList()) : ListDataSource<T> {

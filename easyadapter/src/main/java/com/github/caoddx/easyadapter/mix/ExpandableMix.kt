@@ -1,13 +1,13 @@
-package com.github.caoddx.easyadapter.experimental.mix
+package com.github.caoddx.easyadapter.mix
 
 import android.support.annotation.LayoutRes
 import android.view.View
 import com.github.caoddx.easyadapter.PlainGroup
-import com.github.caoddx.easyadapter.experimental.datasource.ExpandableDataSource
-import com.github.caoddx.easyadapter.experimental.datasource.ListDataSource
-import com.github.caoddx.easyadapter.experimental.datasource.SingleDataSource
-import com.github.caoddx.easyadapter.experimental.plain.ListGroup
-import com.github.caoddx.easyadapter.experimental.plain.SingleGroup
+import com.github.caoddx.easyadapter.datasource.ExpandableDataSource
+import com.github.caoddx.easyadapter.datasource.ListDataSource
+import com.github.caoddx.easyadapter.datasource.SingleDataSource
+import com.github.caoddx.easyadapter.plain.ListGroup
+import com.github.caoddx.easyadapter.plain.SingleGroup
 
 class ExpandableMix<T, R>(
         private val dataSource: ExpandableDataSource<T, R>,

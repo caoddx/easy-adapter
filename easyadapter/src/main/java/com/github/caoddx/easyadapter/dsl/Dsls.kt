@@ -1,8 +1,8 @@
-package com.github.caoddx.easyadapter.experimental.dsl
+package com.github.caoddx.easyadapter.dsl
 
 import android.view.View
 import com.github.caoddx.easyadapter.EasyAdapter
-import com.github.caoddx.easyadapter.experimental.datasource.*
+import com.github.caoddx.easyadapter.datasource.*
 
 fun easyAdapter(emptyView: View? = null, adapterDsl: AdapterDsl.() -> Unit): EasyAdapter {
     val dsl = AdapterDsl()

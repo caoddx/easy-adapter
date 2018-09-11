@@ -3,8 +3,8 @@ package com.github.caoddx.easyadapter.example
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import com.github.caoddx.easyadapter.experimental.datasource.ExpandableDataSource
-import com.github.caoddx.easyadapter.experimental.dsl.*
+import com.github.caoddx.easyadapter.datasource.ExpandableDataSource
+import com.github.caoddx.easyadapter.dsl.*
 import kotlinx.android.synthetic.main.activity_expandable.*
 import kotlinx.android.synthetic.main.item_action.view.*
 import kotlinx.android.synthetic.main.item_body.view.*

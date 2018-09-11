@@ -2,44 +2,29 @@ package com.github.caoddx.easyadapter.plain
 
 import android.support.annotation.LayoutRes
 import android.view.View
+import com.github.caoddx.easyadapter.datasource.SingleDataSource
 
-open class SingleGroup<T>(@LayoutRes layoutId: Int, item: T, initVisible: Boolean = true,
-                          onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
+class SingleGroup<T>(@LayoutRes layoutId: Int,
+                     private val singleDataSource: SingleDataSource<T>,
+                     val onBind: SingleGroup<T>.(itemView: View, item: T) -> Unit)
+    : BasePlainGroup<T>(layoutId) {
 
-    var item: T = item
-        private set
+    init {
+        singleDataSource.group = this
+    }
 
-    override fun getItem(position: Int): T {
-        return item
+    override fun bindView(itemView: View, position: Int) {
+        onBind(this, itemView, getItem(position))
     }
 
     override val size: Int
-        get() = if (_visible) 1 else 0
+        get() = if (singleDataSource.haveData()) 1 else 0
 
-    private var _visible: Boolean = initVisible
+    override fun getItem(position: Int): T {
+        require(position == 0)
+        check(singleDataSource.haveData())
 
-    var visible: Boolean
-        get() = _visible
-        set(value) {
-            if (value != _visible) {
-                val oldSize = size
-                _visible = value
-                notifyDataSetChanged(oldSize)
-            }
-        }
-
-    fun show() {
-        visible = true
-    }
-
-    fun hide() {
-        visible = false
-    }
-
-    fun replace(item: T) {
-        this.item = item
-        if (visible) {
-            notifyItemChanged(0)
-        }
+        return singleDataSource.getItem()
     }
 }
+

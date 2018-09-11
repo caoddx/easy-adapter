@@ -1,4 +1,4 @@
-package com.github.caoddx.easyadapter.experimental.dsl
+package com.github.caoddx.easyadapter.dsl
 
 import android.support.annotation.LayoutRes
 import com.github.caoddx.easyadapter.Group

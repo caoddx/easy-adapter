@@ -2,25 +2,25 @@ package com.github.caoddx.easyadapter.plain
 
 import android.support.annotation.LayoutRes
 import android.view.View
+import com.github.caoddx.easyadapter.datasource.ListDataSource
 
-class ListGroup<T>(@LayoutRes layoutId: Int, items: List<T>, onBind: BaseGroup<T>.(itemView: View, position: Int) -> Unit) : BaseGroup<T>(layoutId, onBind) {
+class ListGroup<T>(@LayoutRes layoutId: Int,
+                   val dataSource: ListDataSource<T>,
+                   val onBind: ListGroup<T>.(itemView: View, item: T, position: Int) -> Unit)
+    : BasePlainGroup<T>(layoutId) {
 
-    private var items: List<T> = items.toList()
+    init {
+        dataSource.group = this
+    }
 
-    override fun getItem(position: Int): T {
-        return items[position]
+    override fun bindView(itemView: View, position: Int) {
+        onBind(this, itemView, getItem(position), position)
     }
 
     override val size: Int
-        get() = items.size
+        get() = dataSource.getSize()
 
-    fun clear() {
-        replace(emptyList())
-    }
-
-    fun replace(items: List<T>) {
-        val oldSize = size
-        this.items = items.toList()
-        notifyDataSetChanged(oldSize)
+    override fun getItem(position: Int): T {
+        return dataSource.getItem(position)
     }
 }

@@ -3,7 +3,8 @@ package com.github.caoddx.easyadapter.mix
 import com.github.caoddx.easyadapter.plain.BaseGroup
 import java.util.*
 
-open class MutableGroupSet : BaseGroupSet() {
+@Deprecated("need reform")
+open class MutableGroupSet : BaseMixGroup() {
 
     private val groups = LinkedList<BaseGroup<*>>()
 

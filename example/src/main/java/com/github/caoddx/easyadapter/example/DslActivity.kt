@@ -3,10 +3,10 @@ package com.github.caoddx.easyadapter.example
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import com.github.caoddx.easyadapter.experimental.datasource.MutableListDataSource
-import com.github.caoddx.easyadapter.experimental.dsl.easyAdapter
-import com.github.caoddx.easyadapter.experimental.dsl.list
-import com.github.caoddx.easyadapter.experimental.dsl.single
+import com.github.caoddx.easyadapter.datasource.MutableListDataSource
+import com.github.caoddx.easyadapter.dsl.easyAdapter
+import com.github.caoddx.easyadapter.dsl.list
+import com.github.caoddx.easyadapter.dsl.single
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_action.view.*
 import kotlinx.android.synthetic.main.item_body.view.*

@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.github.caoddx.easyadapter.mix.SingleGroupSet
+import com.github.caoddx.easyadapter.mix.SingleMix
 
 /*var RecyclerView.multiAdapter: EasyAdapter
     set(value) {
@@ -15,7 +15,7 @@ import com.github.caoddx.easyadapter.mix.SingleGroupSet
 class EasyAdapter(vararg groups: Group, private val emptyView: View? = null) : RecyclerView.Adapter<EasyAdapter.ViewHolder>() {
 
     private val groupSets: List<MixGroup> = groups.map {
-        (it as? MixGroup ?: SingleGroupSet(it as PlainGroup<*>)).also { it.adapter = this }
+        (it as? MixGroup ?: SingleMix(it as PlainGroup<*>)).also { it.adapter = this }
     }
 
     private fun transSetPosition(packageGroup: MixGroup, position: Int): Pair<PlainGroup<*>, Int> {

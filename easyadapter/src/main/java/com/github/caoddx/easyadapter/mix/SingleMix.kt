@@ -2,7 +2,7 @@ package com.github.caoddx.easyadapter.mix
 
 import com.github.caoddx.easyadapter.PlainGroup
 
-class SingleGroupSet(private val group: PlainGroup<*>) : BaseGroupSet() {
+class SingleMix(private val group: PlainGroup<*>) : BaseMixGroup() {
 
     private val groups = listOf(group)
 

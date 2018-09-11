@@ -1,6 +1,6 @@
-package com.github.caoddx.easyadapter.experimental.datasource
+package com.github.caoddx.easyadapter.datasource
 
-import com.github.caoddx.easyadapter.experimental.plain.SingleGroup
+import com.github.caoddx.easyadapter.plain.SingleGroup
 
 class ImmutableSingleDataSource<T>(val data: T) : SingleDataSource<T> {
 

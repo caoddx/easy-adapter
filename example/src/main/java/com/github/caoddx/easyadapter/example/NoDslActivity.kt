@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.github.caoddx.easyadapter.EasyAdapter
-import com.github.caoddx.easyadapter.experimental.datasource.ImmutableSingleDataSource
-import com.github.caoddx.easyadapter.experimental.datasource.MutableListDataSource
-import com.github.caoddx.easyadapter.experimental.plain.ListGroup
-import com.github.caoddx.easyadapter.experimental.plain.SingleGroup
+import com.github.caoddx.easyadapter.datasource.ImmutableSingleDataSource
+import com.github.caoddx.easyadapter.datasource.MutableListDataSource
+import com.github.caoddx.easyadapter.plain.ListGroup
+import com.github.caoddx.easyadapter.plain.SingleGroup
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_action.view.*
 import kotlinx.android.synthetic.main.item_body.view.*

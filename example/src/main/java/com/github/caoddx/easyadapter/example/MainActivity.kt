@@ -4,8 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import com.github.caoddx.easyadapter.experimental.dsl.easyAdapter
-import com.github.caoddx.easyadapter.experimental.dsl.list
+import com.github.caoddx.easyadapter.dsl.easyAdapter
+import com.github.caoddx.easyadapter.dsl.list
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.item_action.view.*
 

@@ -1,4 +1,4 @@
-package com.github.caoddx.easyadapter.experimental.plain
+package com.github.caoddx.easyadapter.plain
 
 import android.support.annotation.LayoutRes
 import com.github.caoddx.easyadapter.MixGroup

@@ -1,7 +1,7 @@
-package com.github.caoddx.easyadapter.experimental.datasource
+package com.github.caoddx.easyadapter.datasource
 
 import com.github.caoddx.easyadapter.PlainGroup
-import com.github.caoddx.easyadapter.experimental.mix.ExpandableMix
+import com.github.caoddx.easyadapter.mix.ExpandableMix
 import java.util.*
 
 class ExpandableDataSource<T, R>(initData: List<Pair<T, List<R>>>) {
