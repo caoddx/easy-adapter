@@ -15,6 +15,16 @@ class MutableSingleDataSource<T>(initData: T) : SingleDataSource<T> {
         }
 
     var visible: Boolean = true
+        set(value) {
+            if (field && !value) {
+                field = value
+                group?.notifyDataSetChanged(1)
+            }
+            if (!field && value) {
+                field = value
+                group?.notifyDataSetChanged(0)
+            }
+        }
 
     override fun haveData(): Boolean {
         return visible
@@ -25,16 +35,10 @@ class MutableSingleDataSource<T>(initData: T) : SingleDataSource<T> {
     }
 
     fun show() {
-        if (!visible) {
-            visible = true
-            group?.notifyDataSetChanged(0)
-        }
+        visible = true
     }
 
     fun hide() {
-        if (visible) {
-            visible = false
-            group?.notifyDataSetChanged(1)
-        }
+        visible = false
     }
 }
