@@ -10,19 +10,21 @@ class ExpandableDataSource<T, R>(initData: List<Pair<T, List<R>>>) {
         return data.size
     }
 
-    fun getItem(position: Int): Pair<T, List<R>> {
+    fun getItem(position: Int): Item<T, R> {
         return data[position]
     }
 
-    private val data: MutableList<Pair<T, List<R>>> = LinkedList(initData)
+    private val data: MutableList<Item<T, R>> = LinkedList(initData.map {
+        Item(it.first, it.second, false, ImmutableSingleDataSource(it.first), MutableListDataSource(it.second))
+    })
 
     internal var mix: ExpandableMix<T, R>? = null
         set(value) {
             field = value
 
             if (value != null) {
-                data.forEachIndexed { index, (head, bodies) ->
-                    add(index, head, bodies, false)
+                data.forEachIndexed { index, item ->
+                    add(index, item, false)
                 }
             }
         }
@@ -34,11 +36,11 @@ class ExpandableDataSource<T, R>(initData: List<Pair<T, List<R>>>) {
         groups.add(group)
     }
 
-    private fun add(index: Int, head: T, bodies: List<R>, notify: Boolean) {
+    private fun add(index: Int, item: Item<T, R>, notify: Boolean) {
         val m = mix
         if (m != null) {
-            val hg = m.generateHeadGroup(index, ImmutableSingleDataSource(head))
-            val bg = m.generateBodyGroup(ImmutableListDataSource(bodies))
+            val hg = m.generateHeadGroup(index, item.headDataSource)
+            val bg = m.generateBodyGroup(item.bodyDataSource)
             addGroup(hg)
             addGroup(bg)
 
@@ -52,9 +54,37 @@ class ExpandableDataSource<T, R>(initData: List<Pair<T, List<R>>>) {
 
     fun add(head: T, bodies: List<R>) {
         val index = data.size
-        data.add(head to bodies)
-        add(index, head, bodies, true)
+        val item = Item(head, bodies, false, ImmutableSingleDataSource(head), MutableListDataSource(bodies))
+        data.add(item)
+        add(index, item, true)
     }
 
-    data class Head<T, R>(val headIndex: Int, val head: T, val bodies: List<R>, val folded: Boolean)
+    fun fold(headIndex: Int) {
+        val item = data[headIndex]
+        if (!item.folded) {
+            item.bodyDataSource.clear()
+            data[headIndex] = item.copy(folded = true)
+        }
+    }
+
+    fun unfold(headIndex: Int) {
+        val item = data[headIndex]
+        if (item.folded) {
+            item.bodyDataSource.replace(item.bodies)
+            data[headIndex] = item.copy(folded = false)
+        }
+    }
+
+    fun toggle(headIndex: Int) {
+        val item = data[headIndex]
+        if (item.folded) {
+            unfold(headIndex)
+        } else {
+            fold(headIndex)
+        }
+    }
+
+    data class Item<T, R>(val head: T, val bodies: List<R>, val folded: Boolean,
+                          internal val headDataSource: ImmutableSingleDataSource<T>,
+                          internal val bodyDataSource: MutableListDataSource<R>)
 }

@@ -45,7 +45,7 @@ class ExpandableActivity : AppCompatActivity() {
                     bindView { itemView, headIndex, item ->
                         itemView.button.text = "$headIndex $item"
                         itemView.button.setOnClickListener {
-
+                            ds.toggle(headIndex)
                         }
                     }
                 }
