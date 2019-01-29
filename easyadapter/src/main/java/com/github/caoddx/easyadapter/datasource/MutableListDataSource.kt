@@ -30,6 +30,11 @@ class MutableListDataSource<T>(initData: List<T> = emptyList()) : ListDataSource
         group?.notifyDataSetChanged(oldSize)
     }
 
+    fun refreshAt(index: Int, item: T) {
+        items[index] = item
+        group?.notifyItemChanged(index)
+    }
+
     fun add(index: Int, item: T) {
         items.add(index, item)
         group?.notifyItemInserted(index)
